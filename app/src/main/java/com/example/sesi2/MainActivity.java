@@ -14,9 +14,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //deklarasi variable
-    TextView tvUsername;
-    EditText etUsername;
-    Button btnLogin;
+    TextView tvGreetings;
+    EditText etUsername, etPassword;
+    Button btnSendUsername, btnSendPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +25,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.v("act1", "on create dipanggil");
 
-        tvUsername = findViewById(R.id.tvUsername);
-        tvUsername.setText("Greetings Binusian");
+        tvGreetings = findViewById(R.id.tvGreetings);
+        tvGreetings.setText("Greetings Binusian");
 
-        btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(this);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+
+        btnSendUsername = findViewById(R.id.btnSendUsername);
+        btnSendUsername.setOnClickListener(this);
+
+        btnSendPassword = findViewById(R.id.btnSendPassword);
+        btnSendPassword.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "button ditekan", Toast.LENGTH_LONG).show();
-//        Intent niat = new Intent(this,MainActivity2.class);
-//        startActivity(niat);
+
+        String strToSend;
+
+        if(v.getId()==R.id.btnSendUsername){
+            strToSend = etUsername.getText().toString();
+        }else{
+            strToSend = etPassword.getText().toString();
+        }
+
+        Intent niat = new Intent(this,MainActivity2.class);
+        niat.putExtra("kirimanString", strToSend);
+        startActivity(niat);
     }
 
     @Override
